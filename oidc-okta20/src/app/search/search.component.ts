@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Person, SearchService } from '../shared';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
   selector: 'app-search',
@@ -10,6 +11,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit, OnDestroy {
+
+  searchValue: string = "";
   query: string;
   searchResults: Array<Person>;
   sub: Subscription;
@@ -37,5 +40,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       },
       error => console.log(error)
     );
+  }
+
+  clearInput(form: NgForm) {
+    form.reset();
   }
 }
