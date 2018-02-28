@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchService } from './shared';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './edit/edit.component';
 
 const appRoutes: Routes = [
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

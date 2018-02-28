@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   searchValue: string = "";
   query: string;
-  searchResults: Array<Person>;
+  searchResults: Person[];
   sub: Subscription;
 
   constructor(private searchService: SearchService, private route: ActivatedRoute) {
@@ -26,18 +26,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
   search(): void {
     this.searchService.search(this.query).subscribe(
-      data => {
-        this.searchResults = data;
-      },
+      data => { this.searchResults = data; },
       error => console.log(error)
     );
   }
@@ -45,4 +36,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   clearInput(form: NgForm) {
     form.reset();
   }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  
 }
