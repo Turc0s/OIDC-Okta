@@ -5,27 +5,33 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchService } from './shared';
+import { SearchService, AuthGuard  } from './shared';
 import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './edit/edit.component';
+import { HomeComponent } from './home/home.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 const appRoutes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'edit/:id', component: EditComponent},
-  {path: '', redirectTo: '/search', pathMatch: 'full'}
+  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    EditComponent
+    EditComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]
