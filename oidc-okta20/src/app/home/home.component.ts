@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { OktaAuthWrapper } from '../shared';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,22 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private oauthService: OAuthService) {
+  username;
+  password;
+
+  constructor(private oauthService: OAuthService,
+              private oktaAuthWrapper: OktaAuthWrapper) {
 
   }
 
   ngOnInit() {
     
+  }
+
+  loginWithPassword() {
+    this.oktaAuthWrapper.login(this.username, this.password)
+      .then(_ => console.debug('logged in'))
+      .catch(err => console.error('error logging in', err));
   }
 
   login() {

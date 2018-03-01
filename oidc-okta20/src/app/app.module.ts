@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchService, AuthGuard  } from './shared';
+import { SearchService, AuthGuard, OktaAuthWrapper  } from './shared';
 import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './edit/edit.component';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     OAuthModule.forRoot()
   ],
-  providers: [SearchService],
+  providers: [SearchService, OktaAuthWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule {
