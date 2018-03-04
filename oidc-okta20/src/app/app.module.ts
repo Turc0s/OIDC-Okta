@@ -12,8 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 
 const appRoutes: Routes = [
-  {path: 'search', component: SearchComponent},
-  {path: 'edit/:id', component: EditComponent},
+  {path: 'search', component: SearchComponent, canActivate:[AuthGuard]},
+  {path: 'edit/:id', component: EditComponent, canActivate:[AuthGuard]},
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', redirectTo: 'home'}
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     OAuthModule.forRoot()
   ],
-  providers: [SearchService, OktaAuthWrapper],
+  providers: [SearchService, OktaAuthWrapper, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
